@@ -1,0 +1,17 @@
+{
+  "name": "virtual-keyboard",
+  "version": "1.0.0",
+  "description": "RSS st1 project",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ./js",
+    "lint:fix": "eslint ./js --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.39.0",
+    "eslint-config-airbnb": "^19.0.4"
+  }
+}
