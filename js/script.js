@@ -2,11 +2,16 @@ const BODY = document.querySelector('body');
 BODY.classList.add('body');
 const WRAPPER = document.createElement('div');
 WRAPPER.classList.add('wrapper');
+const HEADER = document.createElement('h1');
+HEADER.classList.add('title');
+HEADER.innerText = 'Virtual Keyboard';
+const TEXTAREA = document.createElement('textarea');
+TEXTAREA.classList.add('textarea');
+const KEYBOARD = document.createElement('div');
+KEYBOARD.classList.add('keyboard');
 BODY.append(WRAPPER);
+WRAPPER.append(HEADER, TEXTAREA, KEYBOARD);
 WRAPPER.insertAdjacentHTML('beforeend', `
-  <h1 class="title">Virtual keyboard</h1>
-  <textarea class="textarea"></textarea>
-  <div class="keyboard"></div>
   <p class="description">Клавиатура создана в операционной системе Windows</p>
   <p class="lang-tip">Переключение языка: левые ctrl + alt</p>
 `);

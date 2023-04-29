@@ -1,4 +1,111 @@
+.body{
+  background-color: gainsboro;
+  font-family:'Courier New', Courier, monospace;
+}
+
 .wrapper {
   margin: 0 auto;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.description, .lang-tip, .title {
+  text-align: center;
+}
+
+.textarea {
+  display: block;
+  width: 700px;
+  height: 200px;
+  margin: 10px auto 10px;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.keyboard {
+  width: 704px;
+  margin: 0 auto;
+  padding: 5px;
+  padding-left: 0;
+  padding-bottom: 0;
+  background: #888888;
+  border: 3px solid #222222;
+  border-radius: 5px;
+}
+
+.keyboard .row {
+  clear: both;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 8px
+}
+
+.keyboard .key {
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin-left: 6px;
+  line-height: 40px;
+  text-align: center;
+  font-weight: 500;
+  color: #222222;
+  background-color:#c3c7c94f;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+  transition: border-radius 0.3s, background-color 0.3s
+}
+
+.keyboard .key:hover {
+  background: #bec5c5;
+}
+
+.keyboard .key.active {
+  background-color: #7eb9cc;
+  border-radius: 9px;
+}
+
+.keyboard .alt-left,
+.keyboard .alt-right,
+.keyboard .arrow-up,
+.keyboard .arrow-left,
+.keyboard .arrow-down,
+.keyboard .arrow-right,
+.keyboard .backspace,
+.keyboard .capslock,
+.keyboard .ctrl-left,
+.keyboard .ctrl-right,
+.keyboard .delete,
+.keyboard .enter,
+.keyboard .shift-left,
+.keyboard .shift-right,
+.keyboard .tab,
+.keyboard .win-com {
+  font-weight: 600;
+  background-color:#bec2c4;
+}
+
+.keyboard .tab {
+  width: 50px;
+}
+
+.keyboard .backspace,
+.keyboard .capslock,
+.keyboard .shift-left {
+  width: 100px;
+}
+
+.keyboard .delete {
+  width: 44px;
+}
+
+.keyboard .enter,
+.keyboard .shift-right {
+  width: 86px;
+}
+
+.keyboard .space {
+  width: 330px;
+}
+
+.hidden {
+  display: none;
 }
