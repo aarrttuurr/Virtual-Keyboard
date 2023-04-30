@@ -109,3 +109,12 @@
 .hidden {
   display: none;
 }
+
+.caseDown,
+.caseUp,
+.shiftCaps,
+.caps {
+  display: block;
+  width: 100;
+  min-height: 40px
+}
