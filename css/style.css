@@ -58,7 +58,7 @@
   background: #bec5c5;
 }
 
-.keyboard .key.active {
+.keyboard .key:active {
   background-color: #7eb9cc;
   border-radius: 9px;
 }
