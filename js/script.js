@@ -161,7 +161,57 @@ function createKeys() {
 
       case 'CapsLock':
         key.addEventListener('click', () => {
+          key.classList.toggle('active');
+          const allKeys = document.querySelectorAll('.key');
+          allKeys.forEach((item) => {
+            item.querySelector('span:not(.hidden) > .caseDown').classList.toggle('hidden');
+            item.querySelector('span:not(.hidden) > .caps').classList.toggle('hidden');
+          });
+        });
 
+        break;
+
+      case 'ShiftLeft', 'ShiftRight':
+        key.addEventListener('mousedown', () => {
+          key.classList.toggle('active');
+          const allKeys = document.querySelectorAll('.key');
+          allKeys.forEach((item) => {
+            item.querySelector('span:not(.hidden) > .caseDown').classList.toggle('hidden');
+            item.querySelector('span:not(.hidden) > .caseUp').classList.toggle('hidden');
+          });
+        });
+
+        break;
+
+      case 'Enter':
+        key.addEventListener('mousedown', (event) => {
+          event.preventDefault();
+          const cursPos = TEXTAREA.selectionStart;
+          TEXTAREA.value = `${TEXTAREA.value.substring(0, cursPos)}\n${TEXTAREA.value.substring(cursPos)}`;
+          TEXTAREA.setSelectionRange(cursPos + 1, cursPos + 1);
+          TEXTAREA.focus();
+        });
+
+        break;
+
+      case 'Space':
+        key.addEventListener('mousedown', (event) => {
+          event.preventDefault();
+          const cursPos = TEXTAREA.selectionStart;
+          TEXTAREA.value = `${TEXTAREA.value.substring(0, cursPos)} ${TEXTAREA.value.substring(cursPos)}`;
+          TEXTAREA.setSelectionRange(cursPos + 1, cursPos + 1);
+          TEXTAREA.focus();
+        });
+
+        break;
+
+      case 'Tab':
+        key.addEventListener('mousedown', (event) => {
+          event.preventDefault();
+          const cursPos = TEXTAREA.selectionStart;
+          TEXTAREA.value = `${TEXTAREA.value.substring(0, cursPos)}\t${TEXTAREA.value.substring(cursPos)}`;
+          TEXTAREA.setSelectionRange(cursPos + 1, cursPos + 1);
+          TEXTAREA.focus();
         });
 
         break;
