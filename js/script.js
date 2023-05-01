@@ -23,81 +23,77 @@ WRAPPER.insertAdjacentHTML('beforeend', `
   <p class="lang-tip">Переключение языка: левые ctrl + alt</p>
 `);
 
-/* TEXTAREA.addEventListener('blur', () => {
-  setTimeout(() => TEXTAREA.focus(), 100);
-}, true); */
-
 for (let i = 0; i < 5; i++) {
   const row = document.createElement('div');
   row.classList.add('row');
   KEYBOARD.append(row);
 }
 
-function createKeys() {
-  const keyLayoutRuCaseDown = [
-    ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
-    ['Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Del'],
-    ['CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter'],
-    ['Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', '▲', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
-  ];
-  const keyLayoutRuCaseUp = [
-    ['Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace'],
-    ['Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '/', 'Del'],
-    ['CapsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'Enter'],
-    ['Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', '▲', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
-  ];
-  const keyLayoutRuCaps = [
-    ['Ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
-    ['Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '\\', 'Del'],
-    ['CapsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'Enter'],
-    ['Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', '.', '▲', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
-  ];
-  const keyLayoutRuShiftCaps = [
-    ['ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace'],
-    ['Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '/', 'Del'],
-    ['CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter'],
-    ['Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', ',', '▲', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
-  ];
-  const keyLayoutEnCaseDown = [
-    ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
-    ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Del'],
-    ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'Enter'],
-    ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '▲', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
-  ];
-  const keyLayoutEnCaseUp = [
-    ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace'],
-    ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|', 'Del'],
-    ['CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', 'Enter'],
-    ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', '▲', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
-  ];
-  const keyLayoutEnCaps = [
-    ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
-    ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\', 'Del'],
-    ['CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", 'Enter'],
-    ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', '▲', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
-  ];
-  const keyLayoutEnShiftCaps = [
-    ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace'],
-    ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '{', '}', '|', 'Del'],
-    ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ':', '"', 'Enter'],
-    ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '<', '>', '?', '▲', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
-  ];
-  const keyClasses = [
-    ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace'],
-    ['Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash', 'Delete'],
-    ['CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter'],
-    ['ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ArrowUp', 'ShiftRight'],
-    ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'],
-  ];
+const keyLayoutRuCaseDown = [
+  ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
+  ['Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Del'],
+  ['CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter'],
+  ['Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', '▲', 'Shift'],
+  ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
+];
+const keyLayoutRuCaseUp = [
+  ['Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace'],
+  ['Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '/', 'Del'],
+  ['CapsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'Enter'],
+  ['Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', '▲', 'Shift'],
+  ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
+];
+const keyLayoutRuCaps = [
+  ['Ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
+  ['Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '\\', 'Del'],
+  ['CapsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'Enter'],
+  ['Shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', '.', '▲', 'Shift'],
+  ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
+];
+const keyLayoutRuShiftCaps = [
+  ['ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'Backspace'],
+  ['Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '/', 'Del'],
+  ['CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'Enter'],
+  ['Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', ',', '▲', 'Shift'],
+  ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
+];
+const keyLayoutEnCaseDown = [
+  ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
+  ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Del'],
+  ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'Enter'],
+  ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '▲', 'Shift'],
+  ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
+];
+const keyLayoutEnCaseUp = [
+  ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace'],
+  ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|', 'Del'],
+  ['CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', 'Enter'],
+  ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', '▲', 'Shift'],
+  ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
+];
+const keyLayoutEnCaps = [
+  ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
+  ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\', 'Del'],
+  ['CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", 'Enter'],
+  ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', '▲', 'Shift'],
+  ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
+];
+const keyLayoutEnShiftCaps = [
+  ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', 'Backspace'],
+  ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '{', '}', '|', 'Del'],
+  ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ':', '"', 'Enter'],
+  ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '<', '>', '?', '▲', 'Shift'],
+  ['Ctrl', 'Win', 'Alt', ' ', 'Alt', '◄', '▼', '►', 'Ctrl'],
+];
+const keyClasses = [
+  ['Backquote', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace'],
+  ['Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash', 'Delete'],
+  ['CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter'],
+  ['ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ArrowUp', 'ShiftRight'],
+  ['ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'],
+];
 
+function createKeys() {
   function createKey(rowInd, ind) {
     const key = document.createElement('div');
     const rus = document.createElement('span');
@@ -136,8 +132,30 @@ function createKeys() {
     rus.append(caseDownRu, caseUpRu, capsRu, shiftCapsRu);
     eng.append(caseDownEn, caseUpEn, capsEn, shiftCapsEn);
 
+    function shiftSwitch() {
+      key.classList.toggle('active');
+      const allKeys = document.querySelectorAll('.key');
+      if (document.querySelector('.CapsLock').classList.contains('active')) {
+        allKeys.forEach((item) => {
+          item.querySelector('span:not(.hidden) > .caps').classList.toggle('hidden');
+          item.querySelector('span:not(.hidden) > .shiftCaps').classList.toggle('hidden');
+        });
+      } else {
+        allKeys.forEach((item) => {
+          item.querySelector('span:not(.hidden) > .caseDown').classList.toggle('hidden');
+          item.querySelector('span:not(.hidden) > .caseUp').classList.toggle('hidden');
+        });
+      }
+    }
+
+    function addRemActiv() {
+      key.classList.toggle('active');
+    }
+
     switch (keyClasses[rowInd][ind]) {
       case 'Backspace':
+        key.addEventListener('mousedown', addRemActiv);
+        key.addEventListener('mouseup', addRemActiv);
         key.addEventListener('mousedown', (event) => {
           event.preventDefault();
           const cursPos = TEXTAREA.selectionStart;
@@ -149,6 +167,8 @@ function createKeys() {
         break;
 
       case 'Delete':
+        key.addEventListener('mousedown', addRemActiv);
+        key.addEventListener('mouseup', addRemActiv);
         key.addEventListener('mousedown', (event) => {
           event.preventDefault();
           const cursPos = TEXTAREA.selectionStart;
@@ -171,19 +191,21 @@ function createKeys() {
 
         break;
 
-      case 'ShiftLeft', 'ShiftRight':
-        key.addEventListener('mousedown', () => {
-          key.classList.toggle('active');
-          const allKeys = document.querySelectorAll('.key');
-          allKeys.forEach((item) => {
-            item.querySelector('span:not(.hidden) > .caseDown').classList.toggle('hidden');
-            item.querySelector('span:not(.hidden) > .caseUp').classList.toggle('hidden');
-          });
-        });
+      case 'ShiftLeft':
+        key.addEventListener('mousedown', shiftSwitch);
+        key.addEventListener('mouseup', shiftSwitch);
+
+        break;
+
+      case 'ShiftRight':
+        key.addEventListener('mousedown', shiftSwitch);
+        key.addEventListener('mouseup', shiftSwitch);
 
         break;
 
       case 'Enter':
+        key.addEventListener('mousedown', addRemActiv);
+        key.addEventListener('mouseup', addRemActiv);
         key.addEventListener('mousedown', (event) => {
           event.preventDefault();
           const cursPos = TEXTAREA.selectionStart;
@@ -195,6 +217,8 @@ function createKeys() {
         break;
 
       case 'Space':
+        key.addEventListener('mousedown', addRemActiv);
+        key.addEventListener('mouseup', addRemActiv);
         key.addEventListener('mousedown', (event) => {
           event.preventDefault();
           const cursPos = TEXTAREA.selectionStart;
@@ -206,6 +230,8 @@ function createKeys() {
         break;
 
       case 'Tab':
+        key.addEventListener('mousedown', addRemActiv);
+        key.addEventListener('mouseup', addRemActiv);
         key.addEventListener('mousedown', (event) => {
           event.preventDefault();
           const cursPos = TEXTAREA.selectionStart;
@@ -216,7 +242,39 @@ function createKeys() {
 
         break;
 
+      case 'ControlLeft':
+        key.addEventListener('mousedown', addRemActiv);
+        key.addEventListener('mouseup', addRemActiv);
+
+        break;
+
+      case 'ControlRight':
+        key.addEventListener('mousedown', addRemActiv);
+        key.addEventListener('mouseup', addRemActiv);
+
+        break;
+
+      case 'MetaLeft':
+        key.addEventListener('mousedown', addRemActiv);
+        key.addEventListener('mouseup', addRemActiv);
+
+        break;
+
+      case 'AltLeft':
+        key.addEventListener('mousedown', addRemActiv);
+        key.addEventListener('mouseup', addRemActiv);
+
+        break;
+
+      case 'AltRight':
+        key.addEventListener('mousedown', addRemActiv);
+        key.addEventListener('mouseup', addRemActiv);
+
+        break;
+
       default:
+        key.addEventListener('mousedown', addRemActiv);
+        key.addEventListener('mouseup', addRemActiv);
         key.addEventListener('mousedown', (event) => {
           event.preventDefault();
           const cursPos = TEXTAREA.selectionStart;
@@ -237,3 +295,9 @@ function createKeys() {
 }
 
 createKeys();
+
+/* document.addEventListener('keydown', (event) => {
+  if (event.code === 'ControlLeft' && event.code === 'AltLeft') {
+    console.log('33');
+  }
+}); */

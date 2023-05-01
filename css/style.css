@@ -46,6 +46,7 @@
   line-height: 40px;
   text-align: center;
   font-weight: 500;
+  font-size: 20px;
   color: #222222;
   background-color: #fbfeff9c;
   border-radius: 3px;
@@ -58,7 +59,7 @@
   background: #bec5c5;
 }
 
-.keyboard .key:active {
+.keyboard .key.active {
   background-color: #7eb9cc;
   border-radius: 9px;
 }
@@ -80,6 +81,7 @@
 .keyboard .Tab,
 .keyboard .MetaLeft {
   font-weight: 600;
+  font-size: 16px;
   background-color: #bec2c4;
 }
 
@@ -111,7 +113,6 @@
 .shiftCaps,
 .caps {
   display: block;
-  width: 100;
   min-height: 40px
 }
 
