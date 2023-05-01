@@ -84,25 +84,27 @@
 }
 
 .keyboard .Tab {
-  width: 50px
+  width: 50px;
 }
 
-.keyboard .Backspace,.keyboard .CapsLock,.keyboard .ShiftLeft {
-  width: 100px
+.keyboard .Backspace,
+.keyboard .CapsLock,
+.keyboard .ShiftLeft {
+  width: 100px;
 }
 
 .keyboard .Delete {
-  width: 44px
+  width: 44px;
 }
 
-.keyboard .Enter,.keyboard .ShiftRight {
-  width: 86px
+.keyboard .Enter,
+.keyboard .ShiftRight {
+  width: 86px;
 }
 
 .keyboard .Space {
-  width: 330px
+  width: 330px;
 }
-
 
 .caseDown,
 .caseUp,

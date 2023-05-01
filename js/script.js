@@ -23,7 +23,10 @@ WRAPPER.insertAdjacentHTML('beforeend', `
   <p class="lang-tip">Переключение языка: левые ctrl + alt</p>
 `);
 
-// eslint-disable-next-line no-plusplus
+/* TEXTAREA.addEventListener('blur', () => {
+  setTimeout(() => TEXTAREA.focus(), 100);
+}, true); */
+
 for (let i = 0; i < 5; i++) {
   const row = document.createElement('div');
   row.classList.add('row');
@@ -31,7 +34,6 @@ for (let i = 0; i < 5; i++) {
 }
 
 function createKeys() {
-  // const fragment = document.createDocumentFragment();
   const keyLayoutRuCaseDown = [
     ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
     ['Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Del'],
@@ -136,16 +138,23 @@ function createKeys() {
 
     switch (keyClasses[rowInd][ind]) {
       case 'Backspace':
-        key.addEventListener('click', () => {
+        key.addEventListener('mousedown', (event) => {
+          event.preventDefault();
           const cursPos = TEXTAREA.selectionStart;
           TEXTAREA.value = TEXTAREA.value.substring(0, cursPos - 1) + TEXTAREA.value.substring(cursPos);
+          TEXTAREA.setSelectionRange(cursPos - 1, cursPos - 1);
+          TEXTAREA.focus();
         });
 
         break;
 
       case 'Delete':
-        key.addEventListener('click', () => {
-          TEXTAREA.value = TEXTAREA.value.substring(0, TEXTAREA.value.length - 1);
+        key.addEventListener('mousedown', (event) => {
+          event.preventDefault();
+          const cursPos = TEXTAREA.selectionStart;
+          TEXTAREA.value = TEXTAREA.value.substring(0, cursPos) + TEXTAREA.value.substring(cursPos + 1);
+          TEXTAREA.setSelectionRange(cursPos, cursPos);
+          TEXTAREA.focus();
         });
 
         break;
@@ -158,8 +167,12 @@ function createKeys() {
         break;
 
       default:
-        key.addEventListener('click', () => {
-          TEXTAREA.value += key.querySelector('span:not(.hidden) > span:not(.hidden)').innerText;
+        key.addEventListener('mousedown', (event) => {
+          event.preventDefault();
+          const cursPos = TEXTAREA.selectionStart;
+          TEXTAREA.value = TEXTAREA.value.substring(0, cursPos) + key.querySelector('span:not(.hidden) > span:not(.hidden)').innerText + TEXTAREA.value.substring(cursPos);
+          TEXTAREA.setSelectionRange(cursPos + 1, cursPos + 1);
+          TEXTAREA.focus();
         });
     }
     return key;
