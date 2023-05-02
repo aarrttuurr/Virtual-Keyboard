@@ -296,12 +296,169 @@ function createKeys() {
 
 createKeys();
 
+const allKeys = document.querySelectorAll('.key');
+
+function keyShifterDown() {
+  if (document.querySelector('.CapsLock').classList.contains('active')) {
+    allKeys.forEach((item) => {
+      item.querySelector('span:not(.hidden) > .caps').classList.remove('hidden');
+      item.querySelector('span:not(.hidden) > .shiftCaps').classList.add('hidden');
+    });
+  } else {
+    allKeys.forEach((item) => {
+      item.querySelector('span:not(.hidden) > .caseDown').classList.add('hidden');
+      item.querySelector('span:not(.hidden) > .caseUp').classList.remove('hidden');
+    });
+  }
+}
+
+function keyShifterUp() {
+  if (document.querySelector('.CapsLock').classList.contains('active')) {
+    allKeys.forEach((item) => {
+      item.querySelector('span:not(.hidden) > .caps').classList.add('hidden');
+      item.querySelector('span:not(.hidden) > .shiftCaps').classList.remove('hidden');
+    });
+  } else {
+    allKeys.forEach((item) => {
+      item.querySelector('span:not(.hidden) > .caseDown').classList.remove('hidden');
+      item.querySelector('span:not(.hidden) > .caseUp').classList.add('hidden');
+    });
+  }
+}
+
 document.addEventListener('keydown', (event) => {
+  event.preventDefault();
   const button = document.querySelector(`.${event.code}`);
-  button.classList.toggle('active');
+  if (event.code !== 'CapsLock') {
+    button.classList.add('active');
+  }
   const cursPos = TEXTAREA.selectionStart;
-  TEXTAREA.value = TEXTAREA.value.substring(0, cursPos) + button.querySelector('span:not(.hidden) > span:not(.hidden)').innerText + TEXTAREA.value.substring(cursPos);
+
+  switch (event.code) {
+    case 'Backspace':
+      TEXTAREA.value = TEXTAREA.value.substring(0, cursPos - 1) + TEXTAREA.value.substring(cursPos);
+      TEXTAREA.setSelectionRange(cursPos - 1, cursPos - 1);
+
+      break;
+
+    case 'Delete':
+      TEXTAREA.value = TEXTAREA.value.substring(0, cursPos) + TEXTAREA.value.substring(cursPos + 1);
+      TEXTAREA.setSelectionRange(cursPos, cursPos);
+
+      break;
+
+    case 'CapsLock':
+      allKeys.forEach((item) => {
+        if (document.querySelector('.CapsLock').classList.contains('active')) {
+          item.querySelector('span:not(.hidden) > .caseDown').classList.toggle('hidden');
+          item.querySelector('span:not(.hidden) > .caps').classList.toggle('hidden');
+        } else {
+          item.querySelector('span:not(.hidden) > .caseDown').classList.toggle('hidden');
+          item.querySelector('span:not(.hidden) > .caps').classList.toggle('hidden');
+        }
+      });
+      document.querySelector('.CapsLock').classList.toggle('active');
+
+      break;
+
+    case 'ShiftLeft':
+      keyShifterDown();
+
+      break;
+
+    case 'ShiftRight':
+      keyShifterDown();
+
+      break;
+
+    case 'Enter':
+      TEXTAREA.value = `${TEXTAREA.value.substring(0, cursPos)}\n${TEXTAREA.value.substring(cursPos)}`;
+
+      break;
+
+    case 'Space':
+      TEXTAREA.value = `${TEXTAREA.value.substring(0, cursPos)} ${TEXTAREA.value.substring(cursPos)}`;
+
+      break;
+
+    case 'Tab':
+      TEXTAREA.value = `${TEXTAREA.value.substring(0, cursPos)}\t${TEXTAREA.value.substring(cursPos)}`;
+
+      break;
+
+    case 'ControlLeft':
+
+      break;
+
+    case 'ControlRight':
+
+      break;
+
+    case 'MetaLeft':
+
+      break;
+
+    case 'AltLeft':
+
+      break;
+
+    case 'AltRight':
+
+      break;
+
+    default:
+      TEXTAREA.value = TEXTAREA.value.substring(0, cursPos) + button.querySelector('span:not(.hidden) > span:not(.hidden)').innerText + TEXTAREA.value.substring(cursPos);
+  }
 });
+
 document.addEventListener('keyup', (event) => {
-  document.querySelector(`.${event.code}`).classList.toggle('active');
+  if (event.code !== 'CapsLock') {
+    document.querySelector(`.${event.code}`).classList.remove('active');
+  }
+
+  if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
+    keyShifterUp();
+  }
 });
+
+function runOnKeys(func, ...codes) {
+  const pressed = new Set();
+
+  document.addEventListener('keydown', (event) => {
+    pressed.add(event.code);
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const code of codes) {
+      if (!pressed.has(code)) {
+        return;
+      }
+    }
+
+    pressed.clear();
+
+    func();
+  });
+
+  document.addEventListener('keyup', (event) => {
+    pressed.delete(event.code);
+  });
+}
+
+function langSwitch() {
+  const flattedClasses = keyClasses.flat();
+  flattedClasses.forEach((code) => {
+    // const curKey = document.querySelector(`.${code}`);
+    const curLang = document.querySelector(`.${code} span:not(.hidden)`);
+    const hidLang = document.querySelector(`.${code} .hidden`);
+    const curState = curLang.querySelector('span:not(.hidden)');
+    const activClass = curState.getAttribute('class');
+    console.log(activClass);
+    const futureState = hidLang.querySelector(`.${activClass}`);
+    curState.classList.toggle('hidden');
+    curLang.classList.toggle('hidden');
+    hidLang.classList.toggle('hidden');
+    futureState.classList.toggle('hidden');
+  });
+}
+
+runOnKeys(langSwitch, 'ControlLeft', 'AltLeft');
