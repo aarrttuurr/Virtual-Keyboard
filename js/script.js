@@ -296,8 +296,12 @@ function createKeys() {
 
 createKeys();
 
-/* document.addEventListener('keydown', (event) => {
-  if (event.code === 'ControlLeft' && event.code === 'AltLeft') {
-    console.log('33');
-  }
-}); */
+document.addEventListener('keydown', (event) => {
+  const button = document.querySelector(`.${event.code}`);
+  button.classList.toggle('active');
+  const cursPos = TEXTAREA.selectionStart;
+  TEXTAREA.value = TEXTAREA.value.substring(0, cursPos) + button.querySelector('span:not(.hidden) > span:not(.hidden)').innerText + TEXTAREA.value.substring(cursPos);
+});
+document.addEventListener('keyup', (event) => {
+  document.querySelector(`.${event.code}`).classList.toggle('active');
+});
