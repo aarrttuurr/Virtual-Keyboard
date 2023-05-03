@@ -447,17 +447,15 @@ function runOnKeys(func, ...codes) {
 function langSwitch() {
   const flattedClasses = keyClasses.flat();
   flattedClasses.forEach((code) => {
-    // const curKey = document.querySelector(`.${code}`);
-    const curLang = document.querySelector(`.${code} span:not(.hidden)`);
-    const hidLang = document.querySelector(`.${code} .hidden`);
+    const curLang = document.querySelector(`.${code} > span:not(.hidden)`);
     const curState = curLang.querySelector('span:not(.hidden)');
+    const hidLang = document.querySelector(`.${code} > .hidden`);
     const activClass = curState.getAttribute('class');
-    console.log(activClass);
     const futureState = hidLang.querySelector(`.${activClass}`);
-    curState.classList.toggle('hidden');
-    curLang.classList.toggle('hidden');
-    hidLang.classList.toggle('hidden');
-    futureState.classList.toggle('hidden');
+    curState.classList.add('hidden');
+    curLang.classList.add('hidden');
+    hidLang.classList.remove('hidden');
+    futureState.classList.remove('hidden');
   });
 }
 
